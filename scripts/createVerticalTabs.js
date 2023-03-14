@@ -1,4 +1,4 @@
-import { resizeObserver, getTabPos } from "https://shawn-ettrics.github.io/wildfire/scripts/helpers.js"
+import { resizeObserver, getTabPos } from "https://ettrics.github.io/wildfires/scripts/helpers.js"
 
 function createVerticalTabs(vtElm) {
     return {
