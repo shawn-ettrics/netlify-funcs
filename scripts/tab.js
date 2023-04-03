@@ -1,5 +1,5 @@
-import createVerticalTabs from "https://ettrics.github.io/wildfires/scripts/createVerticalTabs.js"
-import { resizeObserver } from "https://ettrics.github.io/wildfires/scripts/helpers.js"
+import createVerticalTabs from "https://ettricswildfire.netlify.app/scripts/createVerticalTabs.js"
+import { resizeObserver } from "https://ettricswildfire.netlify.app/scripts/helpers.js"
 
 const vertTabs = document.querySelectorAll('.vertical-tabs')
 
