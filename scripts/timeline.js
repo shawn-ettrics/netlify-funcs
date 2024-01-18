@@ -19,17 +19,6 @@ var map = new mapboxgl.Map({
   zoom: 3.6 // Initial zoom
 });
 
-function updateInfo() {
-  var zoom = map.getZoom().toFixed(2);
-  var center = map.getCenter();
-  document.getElementById('info').innerHTML = 'Zoom Level: ' + zoom + '<br>Center: ' + center.lng.toFixed(4) + ', ' + center.lat.toFixed(4);
-}
-
-// Initial info update
-updateInfo();
-
-// Add an event listener for the 'moveend' event
-map.on('moveend', updateInfo);
 
 // Coordinates and details for the markers
 var locations = [
