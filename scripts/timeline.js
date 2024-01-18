@@ -20,8 +20,6 @@ var map = new mapboxgl.Map({
 });
 
 
-// Add an event listener for the 'moveend' event
-map.on('moveend', updateInfo);
 
 // Coordinates and details for the markers
 var locations = [
