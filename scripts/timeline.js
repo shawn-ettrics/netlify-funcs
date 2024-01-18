@@ -43,8 +43,8 @@ var locations = [
   locations.forEach(function(location) {
     // Create a new SVG element for the marker
     var svgMarker = document.createElement('div');
-    svgMarker.innerHTML = `<img src="${location.color}.svg" marker">`;
-    
+    svgMarker.innerHTML = `<img src="https://ettrics.github.io/wildfires/assets/marker-${location.color}.svg" marker">`;
+
     // Create the marker
     new mapboxgl.Marker({
       element: svgMarker.firstChild
