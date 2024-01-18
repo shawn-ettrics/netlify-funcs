@@ -1,3 +1,15 @@
+const mapContainer = document.getElementById('map-container');
+
+const mapDiv = document.createElement('div');
+mapDiv.id = 'map';
+
+const gradientDiv = document.createElement('div');
+gradientDiv.className = 'gradient-overlay';
+
+// Append both divs to the 'map-container' element
+mapContainer.appendChild(mapDiv);
+mapContainer.appendChild(gradientDiv);
+
 // Initialize the map
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhd25jaGkyMDciLCJhIjoiY2t2eDM4eHVoMDBmazJucnBuODFtc3VnZCJ9.FWq9XiUtIMdqiS1wXqzzjQ'; // Your Mapbox Access Token
 var map = new mapboxgl.Map({
