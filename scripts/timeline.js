@@ -16,7 +16,7 @@ var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/shawnchi207/clohoh80p000a01r6eb5uf1ym', // Your style URL
   center: [-114.4995, 41.1391], // Initial position [lng, lat]
-  zoom: 3.6 // Initial zoom
+  zoom: 3.3 // Initial zoom
 });
 
 
