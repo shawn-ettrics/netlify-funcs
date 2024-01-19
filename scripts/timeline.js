@@ -97,7 +97,7 @@ createMap('tl-m0', locationsArr)
 setTimeout(() => {
     createMap('tl-m1', [locationsArr[0]])
     createMap('tl-m2', [locationsArr[1]])
-}, 1000);
+}, 2000);
 
 
 
