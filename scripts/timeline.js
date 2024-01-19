@@ -52,6 +52,7 @@ var locationsArr = [
 
   
 function createMap(containerId, locationsArr) {
+    console.log(document.getElementById(containerId))
     var map = new mapboxgl.Map({
         container: containerId,
         style: 'mapbox://styles/shawnchi207/clohoh80p000a01r6eb5uf1ym', // Your style URL
