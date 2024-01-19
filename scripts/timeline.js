@@ -95,7 +95,8 @@ function createMap(containerId, locationsArr) {
 // Example usage with multiple locations
 createMap('tl-m0', locationsArr)
 createMap('tl-m1', [locationsArr[0]])
-createMap('tl-m2', [locationsArr[1]])
+createMap('tl-m2', [locationsArr[0]])
+createMap('tl-m3', [locationsArr[1]])
 
 
 
