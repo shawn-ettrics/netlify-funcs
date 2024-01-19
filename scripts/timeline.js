@@ -1,7 +1,11 @@
-const mapContainers = document.querySelectorAll('map-container');
+const mapContainers = document.querySelectorAll('.map-container');
+console.log(mapContainers)
 
-mapContainers.forEach(container => {
+mapContainers.forEach((container, i) => {
+    
     const mapDiv = document.createElement('div');
+    mapDiv.id = `tl-m${i}`
+    mapDiv.className = 'map'
 
     const gradientDiv = document.createElement('div');
     gradientDiv.className = 'gradient-overlay';
