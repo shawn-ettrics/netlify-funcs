@@ -94,11 +94,8 @@ function createMap(containerId, locationsArr) {
 
 // Example usage with multiple locations
 createMap('tl-m0', locationsArr)
-setTimeout(() => {
-    createMap('tl-m1', [locationsArr[0]])
-    createMap('tl-m2', [locationsArr[1]])
-}, 2000);
-
+createMap('tl-m1', [locationsArr[0]])
+createMap('tl-m2', [locationsArr[1]])
 
 
 
