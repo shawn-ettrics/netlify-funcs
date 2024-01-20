@@ -87,11 +87,20 @@ function createMap(containerId, locationOrArray) {
             });
             // Adjust the map view to contain all the bounds for multiple locations
             // Use setTimeout to ensure fitBounds applies after all other map operations are complete
-            setTimeout(() => {
-                map.fitBounds(bounds, {
-                    padding: {top: 100, bottom:100, left: 50, right: 50}
-                });
-            }, 0);
+
+            map.fitBounds(bounds, {
+                padding: {top: 100, bottom:100, left: 50, right: 50}
+            });
+            map.on('zoomend', zoomOutAfterFitBounds);
+
+            function zoomOutAfterFitBounds() {
+                // Remove the event listener to avoid infinite loop
+                map.off('zoomend', zoomOutAfterFitBounds);
+            
+                // Zoom out one level
+                map.zoomOut();
+            }
+            
         }
     });
 }
