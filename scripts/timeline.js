@@ -52,51 +52,63 @@ var locationsArr = [
 
   
 function createMap(containerId, locationsArr) {
-    console.log(document.getElementById(containerId))
     var map = new mapboxgl.Map({
         container: containerId,
         style: 'mapbox://styles/shawnchi207/clohoh80p000a01r6eb5uf1ym', // Your style URL
     });
 
+    locationsArr.forEach(function(location) {
+        // Create a new SVG element for the marker
+        var svgMarker = document.createElement('div');
+        svgMarker.innerHTML = `<img src="https://ettrics.github.io/wildfires/assets/marker-${location.color}.svg">`;
 
-    if (locationsArr.length === 1) {
-        // If there's only one location, center the map on it
-        map.setCenter(locationsArr[0].coordinates);
-        map.setZoom(3); // You can adjust this zoom level
-
-        // Add a marker for the single location
-        new mapboxgl.Marker()
-            .setLngLat(locationsArr[0].coordinates)
+        // Create the marker
+        new mapboxgl.Marker({
+            element: svgMarker.firstChild
+        })
+            .setLngLat(location.coordinates)
+            .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+            .setText(location.name))
             .addTo(map);
-    } else {
-        // If there are multiple locations, adjust the view to include all locations
-        var bounds = new mapboxgl.LngLatBounds();
 
-        locationsArr.forEach(function(location) {
-            // Create a marker and add it to the map
-            new mapboxgl.Marker()
-                .setLngLat(location.coordinates)
-                .addTo(map);
+        //check for location count
+        if (locationsArr.length === 1) {
+            map.setCenter(locationsArr[0].coordinates);
+            map.setZoom(3); // You can adjust this zoom level
+    
+        } else {
+            // If there are multiple locations, adjust the view to include all locations
+            var bounds = new mapboxgl.LngLatBounds();
+    
+            locationsArr.forEach(function(location) {
+    
+                // Extend the bounds to include each location's coordinates
+                bounds.extend(location.coordinates);
+            });
+    
+            // Adjust the map view to contain all the bounds
+            map.on('load', function() {
+                map.fitBounds(bounds, {
+                    padding: {top: 50, bottom:50, left: 50, right: 50}
+                });
+            });
 
             // Extend the bounds to include each location's coordinates
             bounds.extend(location.coordinates);
-        });
+        }
 
-        // Adjust the map view to contain all the bounds
-        map.on('load', function() {
-            map.fitBounds(bounds, {
-                padding: {top: 50, bottom:50, left: 50, right: 50}
-            });
-        });
-    }
+
+    });
+
+
+
 
 }
 
 // Example usage with multiple locations
 createMap('tl-m0', locationsArr)
 createMap('tl-m1', [locationsArr[0]])
-createMap('tl-m2', [locationsArr[0]])
-createMap('tl-m3', [locationsArr[1]])
-
+createMap('tl-m2', [locationsArr[1]])
+createMap('tl-m3', [locationsArr[2]])
 
 
