@@ -91,15 +91,10 @@ function createMap(containerId, locationOrArray) {
             map.fitBounds(bounds, {
                 padding: {top: 100, bottom:100, left: 50, right: 50}
             });
-            map.on('zoomend', zoomOutAfterFitBounds);
-
-            function zoomOutAfterFitBounds() {
-                // Remove the event listener to avoid infinite loop
-                map.off('zoomend', zoomOutAfterFitBounds);
-            
-                // Zoom out one level
+            // Add a one-time event listener to zoom out after the 'fitBounds' completes
+            map.once('zoomend', () => {
                 map.zoomOut();
-            }
+            });
             
         }
     });
