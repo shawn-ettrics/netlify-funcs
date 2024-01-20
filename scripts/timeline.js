@@ -50,65 +50,58 @@ var locationsArr = [
     {name: 'Colville National Forest', coordinates: [-117.63219929951526, 48.63556603918802], color: 'red'}
 ];
 
-  
-function createMap(containerId, locationsArr) {
+function createMap(containerId, locationOrArray) {
     var map = new mapboxgl.Map({
         container: containerId,
         style: 'mapbox://styles/shawnchi207/clohoh80p000a01r6eb5uf1ym', // Your style URL
     });
 
-    locationsArr.forEach(function(location) {
-        // Create a new SVG element for the marker
-        var svgMarker = document.createElement('div');
-        svgMarker.innerHTML = `<img src="https://ettrics.github.io/wildfires/assets/marker-${location.color}.svg">`;
+    // Check if locationOrArray is an array, if not, make it an array
+    var locations = Array.isArray(locationOrArray) ? locationOrArray : [locationOrArray];
 
-        // Create the marker
-        new mapboxgl.Marker({
-            element: svgMarker.firstChild
-        })
+    map.on('load', function() {
+        locations.forEach(function(location) {
+            // Create a new SVG element for the marker
+            var svgMarker = document.createElement('div');
+            svgMarker.innerHTML = `<img src="https://ettrics.github.io/wildfires/assets/marker-${location.color}.svg">`;
+
+            // Create the marker
+            new mapboxgl.Marker({
+                element: svgMarker.firstChild
+            })
             .setLngLat(location.coordinates)
-            .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+            .setPopup(new mapboxgl.Popup({ offset: 25 })
             .setText(location.name))
             .addTo(map);
+        });
 
-        //check for location count
-        if (locationsArr.length === 1) {
-            map.setCenter(locationsArr[0].coordinates);
-            map.setZoom(3); // You can adjust this zoom level
-    
+        // Set the map view to fit the single or multiple locations
+        if (locations.length === 1) {
+            map.setCenter(locations[0].coordinates);
+            map.setZoom(3); // Adjust zoom for a single location, consider a more appropriate zoom level
         } else {
-            // If there are multiple locations, adjust the view to include all locations
             var bounds = new mapboxgl.LngLatBounds();
-    
-            locationsArr.forEach(function(location) {
-    
+            locations.forEach(location => {
                 // Extend the bounds to include each location's coordinates
                 bounds.extend(location.coordinates);
             });
-    
-            // Adjust the map view to contain all the bounds
-            map.on('load', function() {
+            // Adjust the map view to contain all the bounds for multiple locations
+            // Use setTimeout to ensure fitBounds applies after all other map operations are complete
+            setTimeout(() => {
                 map.fitBounds(bounds, {
-                    padding: {top: 50, bottom:50, left: 50, right: 50}
+                    padding: {top: 100, bottom:100, left: 50, right: 50}
                 });
-            });
-
-            // Extend the bounds to include each location's coordinates
-            bounds.extend(location.coordinates);
+            }, 0);
         }
-
-
     });
-
-
-
-
 }
+
+
 
 // Example usage with multiple locations
 createMap('tl-m0', locationsArr)
-createMap('tl-m1', [locationsArr[0]])
-createMap('tl-m2', [locationsArr[1]])
-createMap('tl-m3', [locationsArr[2]])
+createMap('tl-m1', locationsArr[0])
+createMap('tl-m2', locationsArr[1])
+createMap('tl-m3', locationsArr[1])
 
 
