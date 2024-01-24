@@ -35,7 +35,7 @@
     color: #F9F7F3;
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 0.5em;
     font-family: "Soehne kraftig", "inter";
 }
 .popup-title {
