@@ -60,10 +60,10 @@ function createMap(containerId, locationOrArray) {
             // Define the HTML content for the popup
             var popupContent = `
                 <div class="map-popup-content">
-                    <div class="popup-title">${location.name}</div>
-                    <div class="stats"><span>400</span>acres assisted</div>
-                    <div class="stats"><span>240</span>staff hours saved</div>
-                    <div class="stats"><span>400</span>dollars saved</div>
+                    <div class="popup-title text-weight-semibold">${location.name}</div>
+                    <div class="stats text-style-mono"><span class="heading-xsmall">400</span>acres assisted</div>
+                    <div class="stats text-style-mono"><span class="heading-xsmall">240</span>staff hours saved</div>
+                    <div class="stats text-style-mono"><span class="heading-xsmall">400</span>dollars saved</div>
                 </div>
             `;
         

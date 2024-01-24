@@ -35,21 +35,21 @@
     color: #F9F7F3;
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
-    font-family: "Soehne kraftig", "inter";
+    gap: 1em;
+    /* font-family: "Soehne kraftig", "inter"; */
 }
 .popup-title {
     font-size: 0.9em;
 }
 .map-popup-content .stats span{
-    font-size: 1.5em;
+    /* font-size: 1.5em; */
     display: block;
-    font-family: "Soehne kraftig", "inter";
+    /* font-family: "Soehne kraftig", "inter"; */
 }
 .map-popup-content .stats{
     font-size: 0.9em;
     display: block;
-    font-family: "Söhne Mono", monospace;
+    /* font-family: "Söhne Mono", monospace; */
 }
 .mapboxgl-popup-close-button {
     display: none;
