@@ -18,7 +18,7 @@
 }
 .mapboxgl-popup{
     z-index: 10;
-    
+    min-width: 200px;
 }
 .mapboxgl-popup-content{
     background: #09150C;
