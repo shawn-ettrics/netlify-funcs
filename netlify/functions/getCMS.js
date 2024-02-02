@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
   const WEBFLOW_API_URL = 'www.wildfires.org/timeline-dev-test/timeline-dev-test-page';
-  const WEBFLOW_API_TOKEN = 'b46f9c3c20419f2751ede5ba9814ca9f6f18e89b54b99c455f6e119a96ff777d'; // Set this in your Netlify environment variables
+  const WEBFLOW_API_TOKEN = process.env.WEBFLOW_API_TOKEN; // Set this in your Netlify environment variables
 
   const response = await fetch(WEBFLOW_API_URL, {
     headers: {
