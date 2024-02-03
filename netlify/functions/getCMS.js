@@ -1,8 +1,12 @@
-// /netlify/functions/fetch-webflow-cms.js
 const fetch = require('node-fetch');
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+app.use(cors()); // This will allow any origin
 
 exports.handler = async function(event, context) {
-  const WEBFLOW_API_URL = 'www.wildfires.org/timeline-dev-test/timeline-dev-test-page';
+  const WEBFLOW_API_URL = 'https://api.webflow.com/collections/65bc8ff35b147be9e97e63f1/items';
   const WEBFLOW_API_TOKEN = process.env.WEBFLOW_API_TOKEN; // Set this in your Netlify environment variables
 
   const response = await fetch(WEBFLOW_API_URL, {
