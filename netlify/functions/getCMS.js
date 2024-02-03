@@ -8,19 +8,18 @@ exports.handler = async function(event, context) {
     const response = await fetch(WEBFLOW_API_URL, {
       headers: {
         'Authorization': `Bearer ${WEBFLOW_API_TOKEN}`,
-        'accept-version': '1.0.0'
+        'accept-version': '1.0.0',
+        'Content-Type': 'application/json'
       }
     });
 
     if (!response.ok) {
-      // If the call was unsuccessful, return the error status with CORS headers
+      // Log the response for debugging
+      console.error('Webflow API response error:', await response.text());
+
       return {
         statusCode: response.status,
-        headers: {
-          "Access-Control-Allow-Origin": "*", // Allows requests from any origin; adjust as necessary
-          "Content-Type": "text/plain"
-        },
-        body: response.statusText
+        body: `Error: ${response.statusText}`
       };
     }
 
@@ -28,20 +27,15 @@ exports.handler = async function(event, context) {
 
     return {
       statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*", // Allows requests from any origin; adjust as necessary
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data.items) // Send back the items from the CMS collection
+      body: JSON.stringify(data.items)
     };
   } catch (error) {
+    // Log the error for debugging
+    console.error('Function error:', error);
+
     return {
       statusCode: 500,
-      headers: {
-        "Access-Control-Allow-Origin": "*", // Allows requests from any origin; adjust as necessary
-        "Content-Type": "text/plain"
-      },
-      body: `Error: ${error.toString()}`
+      body: `Internal Server Error: ${error.message}`
     };
   }
 };
