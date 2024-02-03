@@ -105,7 +105,7 @@ createMap('tl-m3', locationsArr[1])
 
 const endpoint = 'https://webflow-cms-test.netlify.app/.netlify/functions/getCMS';
 
-fetch(endpoint)
+fetch(endpoint, { mode: 'cors' }) // Add this line
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
