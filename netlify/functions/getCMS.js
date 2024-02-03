@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
-  const WEBFLOW_API_URL = 'https://api.webflow.com/collections/65bc8ff35b147be9e97e63f1/items';
+  const WEBFLOW_API_URL = 'https://api.webflow.com/v2/collections/65bc8ff35b147be9e97e63f1/items';
   const WEBFLOW_API_TOKEN = process.env.WEBFLOW_API_TOKEN; // Set this in your Netlify environment variables
 
   // Define headers outside of the try-catch block
