@@ -103,3 +103,19 @@ createMap('tl-m2', locationsArr[0])
 createMap('tl-m3', locationsArr[1])
 
 
+const endpoint = 'https://webflow-cms-test.netlify.app/.netlify/functions/getCMS';
+
+fetch(endpoint)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Console log the data
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('There has been a problem with your fetch operation:', error);
+  });
