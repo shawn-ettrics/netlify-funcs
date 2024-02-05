@@ -105,7 +105,7 @@ createMap('tl-m3', locationsArr[1])
 
 const endpoint = 'https://webflow-cms-test.netlify.app/.netlify/functions/getCMS';
 
-fetch(endpoint, { mode: 'cors' }) // Add this line
+fetch(endpoint, { mode: 'cors' })
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok ' + response.statusText);
@@ -113,8 +113,35 @@ fetch(endpoint, { mode: 'cors' }) // Add this line
     return response.json();
   })
   .then(data => {
-    // Console log the data
-    console.log(data);
+    const locationsArr = data.map(item => {
+      // Assuming 'status' is the field indicating the progress, and it's directly under fieldData
+      const status = item.fieldData.status; // Example: 'in progress', 'coming soon', etc.
+      let color;
+      switch (status) {
+        case 'in progress':
+          color = 'green';
+          break;
+        case 'coming soon':
+          color = 'red';
+          break;
+        case 'future intent':
+          color = 'orange';
+          break;
+        case 'early conversation':
+          color = 'yellow';
+          break;
+        default:
+          color = 'grey'; // Default color if status does not match any case
+      }
+
+      return {
+        name: item.fieldData.name,
+        coordinates: [item.fieldData['y-coordinate'], item.fieldData['x-coordinate']],
+        color: color
+      };
+    });
+
+    console.log(locationsArr);
   })
   .catch(error => {
     console.error('There has been a problem with your fetch operation:', error);
