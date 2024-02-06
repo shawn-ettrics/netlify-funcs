@@ -1,4 +1,24 @@
-const endpoint = 'https://webflow-cms-test.netlify.app/.netlify/functions/getCMS';
+const schemaEndpoint = 'https://webflow-cms-test.netlify.app/.netlify/functions/getCollectionSchema';
+
+fetch(schemaEndpoint, { mode: 'cors' })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok: ' + response.statusText);
+    }
+    return response.json(); // Parse the JSON from the response
+  })
+  .then(schemaData => {
+    console.log('Schema Data:', schemaData); // Log the schema data
+  })
+  .catch(error => {
+    console.error('There has been a problem with your fetch operation:', error);
+  });
+
+
+
+
+
+const endpoint = 'https://webflow-cms-test.netlify.app/.netlify/functions/getCMSItems';
 
 let locationsArr = []
 
