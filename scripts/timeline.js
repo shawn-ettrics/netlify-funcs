@@ -14,7 +14,8 @@ fetch(schemaEndpoint, { mode: 'cors' })
     console.error('There has been a problem with your fetch operation:', error);
   });
 
-//trigger again again
+//trigger again again again
+
 
 
 
