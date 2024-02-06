@@ -40,6 +40,10 @@ fetch(endpoint, { mode: 'cors' })
     });
 
     console.log(locationsArr);
+    createMap('tl-m0', locationsArr)
+    createMap('tl-m1', locationsArr[0])
+    createMap('tl-m2', locationsArr[0])
+    createMap('tl-m3', locationsArr[1])
   })
   .catch(error => {
     console.error('There has been a problem with your fetch operation:', error);
@@ -142,9 +146,6 @@ function createMap(containerId, locationOrArray) {
     });
 }
 
-createMap('tl-m0', locationsArr)
-createMap('tl-m1', locationsArr[0])
-createMap('tl-m2', locationsArr[0])
-createMap('tl-m3', locationsArr[1])
+
 
 
