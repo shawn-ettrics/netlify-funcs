@@ -1,3 +1,51 @@
+const endpoint = 'https://webflow-cms-test.netlify.app/.netlify/functions/getCMS';
+
+const locationsArr = []
+
+fetch(endpoint, { mode: 'cors' })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json();
+  })
+  .then(data => {
+    locationsArr = data.map(item => {
+      // Assuming 'status' is the field indicating the progress, and it's directly under fieldData
+      const status = item.fieldData.status; // Example: 'in progress', 'coming soon', etc.
+      let color;
+      switch (status) {
+        case 'In progress':
+          color = 'green';
+          break;
+        case 'coming soon':
+          color = 'red';
+          break;
+        case 'future intent':
+          color = 'orange';
+          break;
+        case 'early conversation':
+          color = 'yellow';
+          break;
+        default:
+          color = 'grey'; // Default color if status does not match any case
+      }
+
+      return {
+        name: item.fieldData.name,
+        coordinates: [item.fieldData['y-coordinate'], item.fieldData['x-coordinate']],
+        color: color,
+        acres: item.fieldData.acres
+      };
+    });
+
+    console.log(locationsArr);
+  })
+  .catch(error => {
+    console.error('There has been a problem with your fetch operation:', error);
+  });
+
+
 const mapContainers = document.querySelectorAll('.map-container');
 console.log(mapContainers)
 
@@ -15,23 +63,21 @@ mapContainers.forEach((container, i) => {
     container.appendChild(gradientDiv);
 })
 
-
-
 // Initialize the map
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2hhd25jaGkyMDciLCJhIjoiY2t2eDM4eHVoMDBmazJucnBuODFtc3VnZCJ9.FWq9XiUtIMdqiS1wXqzzjQ'; // Your Mapbox Access Token
 
 
 // Coordinates and details for the markers
-var locationsArr = [
-    {name: 'Tahoe National Forest', coordinates: [-120.56273155319109, 39.56316074131553], color: 'green'},
-    {name: 'Umatilla National Forest', coordinates: [-118.66602297418554, 45.194747601460605], color: 'yellow'},
-    {name: 'Arapaho and Roosevelt National Forest', coordinates: [-105.70830509936006, 40.137517186737234], color: 'orange'},
-    {name: 'Klamath National Forest', coordinates: [-123.32754649610563, 41.501407226051214], color: 'red'},
-    {name: 'San Bernadino National Forest', coordinates: [-116.94719510161978, 34.05698272339319], color: 'green'},
-    {name: 'Tonto National Forest', coordinates: [-111.26987236420881, 33.87463158944263], color: 'yellow'},
-    {name: 'Malheur National Forest', coordinates: [-118.83517923780556, 44.12200961141153], color: 'orange'},
-    {name: 'Colville National Forest', coordinates: [-117.63219929951526, 48.63556603918802], color: 'red'}
-];
+// var locationsArr = [
+//     {name: 'Tahoe National Forest', coordinates: [-120.56273155319109, 39.56316074131553], color: 'green'},
+//     {name: 'Umatilla National Forest', coordinates: [-118.66602297418554, 45.194747601460605], color: 'yellow'},
+//     {name: 'Arapaho and Roosevelt National Forest', coordinates: [-105.70830509936006, 40.137517186737234], color: 'orange'},
+//     {name: 'Klamath National Forest', coordinates: [-123.32754649610563, 41.501407226051214], color: 'red'},
+//     {name: 'San Bernadino National Forest', coordinates: [-116.94719510161978, 34.05698272339319], color: 'green'},
+//     {name: 'Tonto National Forest', coordinates: [-111.26987236420881, 33.87463158944263], color: 'yellow'},
+//     {name: 'Malheur National Forest', coordinates: [-118.83517923780556, 44.12200961141153], color: 'orange'},
+//     {name: 'Colville National Forest', coordinates: [-117.63219929951526, 48.63556603918802], color: 'red'}
+// ];
 function createMap(containerId, locationOrArray) {
     var locations = Array.isArray(locationOrArray) ? locationOrArray : [locationOrArray];
 
@@ -61,7 +107,7 @@ function createMap(containerId, locationOrArray) {
             var popupContent = `
                 <div class="map-popup-content">
                     <div class="popup-title text-weight-semibold">${location.name}</div>
-                    <div class="stats text-style-mono"><span class="heading-xsmall">400</span>acres assisted</div>
+                    <div class="stats text-style-mono"><span class="heading-xsmall">${location.acres}</span>acres assisted</div>
                     <div class="stats text-style-mono"><span class="heading-xsmall">240</span>staff hours saved</div>
                     <div class="stats text-style-mono"><span class="heading-xsmall">400</span>dollars saved</div>
                 </div>
@@ -103,46 +149,3 @@ createMap('tl-m2', locationsArr[0])
 createMap('tl-m3', locationsArr[1])
 
 
-const endpoint = 'https://webflow-cms-test.netlify.app/.netlify/functions/getCMS';
-
-fetch(endpoint, { mode: 'cors' })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok ' + response.statusText);
-    }
-    return response.json();
-  })
-  .then(data => {
-    const locationsArr = data.map(item => {
-      // Assuming 'status' is the field indicating the progress, and it's directly under fieldData
-      const status = item.fieldData.status; // Example: 'in progress', 'coming soon', etc.
-      let color;
-      switch (status) {
-        case 'in progress':
-          color = 'green';
-          break;
-        case 'coming soon':
-          color = 'red';
-          break;
-        case 'future intent':
-          color = 'orange';
-          break;
-        case 'early conversation':
-          color = 'yellow';
-          break;
-        default:
-          color = 'grey'; // Default color if status does not match any case
-      }
-
-      return {
-        name: item.fieldData.name,
-        coordinates: [item.fieldData['y-coordinate'], item.fieldData['x-coordinate']],
-        color: color
-      };
-    });
-
-    console.log(locationsArr);
-  })
-  .catch(error => {
-    console.error('There has been a problem with your fetch operation:', error);
-  });
