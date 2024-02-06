@@ -10,6 +10,7 @@ fetch(endpoint, { mode: 'cors' })
     return response.json();
   })
   .then(data => {
+    console.log(data)
     locationsArr = data.map(item => {
       // Assuming 'status' is the field indicating the progress, and it's directly under fieldData
       const status = item.fieldData.status; // Example: 'in progress', 'coming soon', etc.
