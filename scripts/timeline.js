@@ -15,7 +15,7 @@ fetch(endpoint, { mode: 'cors' })
       const status = item.fieldData.status; // Example: 'in progress', 'coming soon', etc.
       let color;
       switch (status) {
-        case 'In progress':
+        case 'in progress':
           color = 'green';
           break;
         case 'coming soon':
@@ -28,7 +28,7 @@ fetch(endpoint, { mode: 'cors' })
           color = 'yellow';
           break;
         default:
-          color = 'grey'; // Default color if status does not match any case
+          color = 'yellow'; // Default color if status does not match any case
       }
 
       return {
