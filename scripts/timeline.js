@@ -1,6 +1,6 @@
 const endpoint = 'https://webflow-cms-test.netlify.app/.netlify/functions/getCMS';
 
-const locationsArr = []
+let locationsArr = []
 
 fetch(endpoint, { mode: 'cors' })
   .then(response => {
@@ -47,7 +47,6 @@ fetch(endpoint, { mode: 'cors' })
 
 
 const mapContainers = document.querySelectorAll('.map-container');
-console.log(mapContainers)
 
 mapContainers.forEach((container, i) => {
     
