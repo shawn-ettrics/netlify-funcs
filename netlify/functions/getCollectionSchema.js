@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 exports.handler = async function(event, context) {
   // Adjusted URL to fetch collection schema instead of items
-  const WEBFLOW_API_URL = 'https://api.webflow.com/collections/65bc8ff35b147be9e97e63f1';
+  const WEBFLOW_API_URL = 'https://api.webflow.com/v2/collections/65bc8ff35b147be9e97e63f1';
   const WEBFLOW_API_TOKEN = process.env.WEBFLOW_API_TOKEN; // Set this in your Netlify environment variables
 
   const headers = {
